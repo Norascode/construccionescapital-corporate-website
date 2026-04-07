@@ -36,19 +36,19 @@ function YouTubeIcon() {
 
 export default function Contact() {
   return (
-    <section id="contacto" className="py-24 bg-[#0a0a1a] relative">
+    <section id="contacto" className="py-24 bg-[#141820] relative">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
         {/* Encabezado */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block text-[#60a5fa] text-xs font-bold uppercase tracking-[0.3em] mb-3">
             Contáctanos
           </span>
-          <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl font-bold uppercase text-white leading-tight mb-4">
             ¿Tienes un proyecto en mente?
           </h2>
           <p className="text-slate-400 text-base sm:text-lg mb-10">
@@ -56,27 +56,22 @@ export default function Contact() {
           </p>
         </motion.div>
 
-        {/* Botones de WhatsApp */}
+        {/* Botón de WhatsApp */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center mb-14"
+          className="flex justify-center mb-14"
         >
           <a
-            href="#"
-            className="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-8 py-4 rounded-2xl transition-colors duration-200 text-base shadow-lg shadow-[#25D366]/20"
+            href="https://wa.me/573000000000?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20sus%20servicios."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
           >
             <WhatsAppIcon />
-            Ventas
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center justify-center gap-3 bg-transparent border-2 border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10 font-bold px-8 py-4 rounded-2xl transition-colors duration-200 text-base"
-          >
-            <WhatsAppIcon />
-            Soporte Técnico
+            Escríbenos por WhatsApp
           </a>
         </motion.div>
 
@@ -84,7 +79,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <p className="text-slate-500 text-sm uppercase tracking-widest mb-5">

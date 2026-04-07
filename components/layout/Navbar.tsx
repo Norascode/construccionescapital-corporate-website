@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 
 const navLinks = [
   { href: "#inicio", label: "Inicio" },
@@ -41,23 +40,7 @@ export default function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a
-          href="#inicio"
-          onClick={(e) => handleNavClick(e, "#inicio")}
-          className="flex items-center"
-        >
-          <Image
-            src="/images/logo.png"
-            alt="Construcciones Capital"
-            width={150}
-            height={50}
-            className="h-10 w-auto object-contain"
-            priority
-          />
-        </a>
-
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-end">
         {/* Links — desktop */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
@@ -65,7 +48,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="text-sm font-semibold text-slate-300 hover:text-[#60a5fa] uppercase tracking-wider transition-colors duration-200 relative group"
+              className="text-base font-semibold text-white hover:text-[#60a5fa] uppercase tracking-wider transition-colors duration-200 relative group"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#1e6fdb] transition-all duration-200 group-hover:w-full" />
@@ -106,7 +89,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-sm font-semibold text-slate-300 hover:text-[#60a5fa] uppercase tracking-wider transition-colors py-3 border-b border-white/5"
+                className="text-base font-semibold text-white hover:text-[#60a5fa] uppercase tracking-wider transition-colors py-3 border-b border-white/5"
               >
                 {link.label}
               </a>

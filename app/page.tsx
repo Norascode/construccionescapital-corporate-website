@@ -21,7 +21,7 @@ export default function Home() {
       </main>
       <Footer />
       {/* Botón flotante de WhatsApp — número placeholder hasta conectar Sanity */}
-      <WhatsAppButton salesNumber="573000000000" supportNumber="573000000000" />
+      <WhatsAppButton phoneNumber="573000000000" />
       <ScrollToTop />
     </>
   );

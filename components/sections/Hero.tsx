@@ -6,22 +6,25 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const slides = [
   {
-    src: "/images/1000537698.jpg",
+    src: "/images/pergola-01.jpg",
     alt: "Pérgola iluminada de noche con paneles LED y piso de madera",
     num: "01",
     label: "Pérgola residencial",
+    objectPosition: "center 15%",
   },
   {
-    src: "/images/1000537699.jpg",
+    src: "/images/techo-01.jpg",
     alt: "Skylight de vidrio en cocina con luz natural y árboles",
     num: "02",
     label: "Skylight cocina integral",
+    objectPosition: "center top",
   },
   {
-    src: "/images/IMG-20260326-WA0106.jpg",
+    src: "/images/techo-02.jpg",
     alt: "Estructura metálica geométrica contra cielo azul",
     num: "03",
     label: "Cubierta en vidrio templado",
+    objectPosition: "center top",
   },
 ];
 
@@ -51,7 +54,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative h-screen min-h-[600px] flex items-center overflow-hidden"
+      className="relative h-screen min-h-[600px] flex flex-col overflow-hidden"
     >
       {/* Carrusel de fondo */}
       <div className="absolute inset-0">
@@ -69,54 +72,83 @@ export default function Hero() {
               alt={slides[currentIndex].alt}
               fill
               className="object-cover"
+              style={{ objectPosition: slides[currentIndex].objectPosition }}
               priority
               sizes="100vw"
             />
           </motion.div>
         </AnimatePresence>
-        {/* Overlay oscuro */}
-        <div className="absolute inset-0 bg-black/50" />
+        {/* Overlay oscuro uniforme */}
+        <div className="absolute inset-0 bg-black/30" />
         {/* Gradiente lateral izquierdo para legibilidad del texto */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
+        {/* Gradiente inferior para legibilidad de indicadores */}
+        <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/55 to-transparent" />
       </div>
 
-      {/* Contenido */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-16">
-        <div className="max-w-2xl">
+      {/* Logo — parte superior, mismo padding que todo el contenido */}
+      <div className="relative z-20 pt-2 px-8 md:px-16 lg:px-24">
+        <a
+          href="#inicio"
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector("#inicio")?.scrollIntoView({ behavior: "smooth" });
+          }}
+        >
+          <Image
+            src="/images/logo.png"
+            alt="Construcciones Capital"
+            width={280}
+            height={100}
+            className="h-[80px] md:h-[160px] w-auto object-contain"
+            priority
+          />
+        </a>
+      </div>
+
+      {/* Contenido principal — centrado verticalmente en el espacio restante */}
+      <div className="relative z-10 flex-1 flex items-start pt-4 md:pt-6 px-8 md:px-16 lg:px-24">
+        <div className="max-w-[95%] sm:max-w-[90%] lg:max-w-[85%]">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black uppercase text-white leading-tight tracking-tight"
+            className="font-sans font-semibold uppercase text-white leading-[1.05] tracking-[0.02em]"
+            style={{ fontSize: "clamp(2.2rem, 4.2vw, 5rem)" }}
           >
-            Transformamos espacios con precisión y diseño
+            <span className="block whitespace-nowrap">Transformamos espacios</span>
+            <span className="block">con precisión</span>
+            <span className="block">y diseño</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.45 }}
-            className="mt-5 text-base sm:text-lg text-slate-300 leading-relaxed"
+            className="mt-4 text-base sm:text-lg text-white font-medium leading-relaxed"
           >
-            Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín.
+            Especialistas en domos, techos, pérgolas, decks y fachadas en
+            Medellín.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.65 }}
-            className="mt-8 flex flex-wrap gap-4"
+            className="mt-10 flex flex-wrap gap-4"
           >
             <a
-              href="#"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-6 py-3 rounded-full transition-colors duration-200 text-sm uppercase tracking-wide shadow-lg"
+              href="https://wa.me/573000000000?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20sus%20servicios."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
             >
               <WhatsAppIcon />
               Contáctanos por WhatsApp
             </a>
             <button
               onClick={scrollToGallery}
-              className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-6 py-3 rounded-full transition-colors duration-200 text-sm uppercase tracking-wide"
+              className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide"
             >
               Ver Proyectos
             </button>
@@ -124,40 +156,38 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Indicadores de slide — parte inferior */}
-      <div className="absolute bottom-8 left-0 right-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex gap-6 sm:gap-10">
-            {slides.map((slide, i) => (
-              <button
-                key={i}
-                onClick={() => setCurrentIndex(i)}
-                className={`flex items-center gap-3 group transition-all duration-300 ${
-                  i === currentIndex ? "opacity-100" : "opacity-40 hover:opacity-70"
+      {/* Indicadores de slide — parte inferior, mismo padding */}
+      <div className="relative z-10 pb-8 px-8 md:px-16 lg:px-24">
+        <div className="flex gap-6 sm:gap-10">
+          {slides.map((slide, i) => (
+            <button
+              key={i}
+              onClick={() => setCurrentIndex(i)}
+              className={`flex items-center gap-3 group transition-all duration-300 ${
+                i === currentIndex ? "opacity-100" : "opacity-40 hover:opacity-70"
+              }`}
+            >
+              <span
+                className={`text-sm font-bold tabular-nums transition-colors duration-300 ${
+                  i === currentIndex ? "text-[#60a5fa]" : "text-white"
                 }`}
               >
-                <span
-                  className={`text-xs font-bold tabular-nums transition-colors duration-300 ${
-                    i === currentIndex ? "text-[#60a5fa]" : "text-white"
-                  }`}
-                >
-                  {slide.num}
-                </span>
-                <span
-                  className={`hidden sm:block h-px w-6 transition-all duration-300 ${
-                    i === currentIndex ? "bg-[#60a5fa] w-10" : "bg-white/50"
-                  }`}
-                />
-                <span
-                  className={`hidden sm:block text-xs font-medium uppercase tracking-wide transition-colors duration-300 ${
-                    i === currentIndex ? "text-white" : "text-slate-400"
-                  }`}
-                >
-                  {slide.label}
-                </span>
-              </button>
-            ))}
-          </div>
+                {slide.num}
+              </span>
+              <span
+                className={`hidden sm:block h-px w-6 transition-all duration-300 ${
+                  i === currentIndex ? "bg-[#60a5fa] w-10" : "bg-white/50"
+                }`}
+              />
+              <span
+                className={`hidden sm:block text-base font-medium uppercase tracking-wide transition-colors duration-300 ${
+                  i === currentIndex ? "text-white" : "text-slate-400"
+                }`}
+              >
+                {slide.label}
+              </span>
+            </button>
+          ))}
         </div>
       </div>
     </section>

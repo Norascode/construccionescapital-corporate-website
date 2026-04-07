@@ -43,12 +43,12 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/40"
           >
             <Image
-              src="/images/IMG-20260326-WA0110.jpg"
+              src="/images/pergola-04.jpg"
               alt="Trabajador instalando estructura de techo"
               fill
               className="object-cover"
@@ -61,13 +61,13 @@ export default function About() {
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.15 }}
           >
             <span className="inline-block text-[#60a5fa] text-xs font-bold uppercase tracking-[0.3em] mb-3">
               Sobre Nosotros
             </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight mb-6">
+            <h2 className="text-4xl sm:text-5xl font-bold uppercase text-white leading-tight mb-6">
               Quiénes Somos
             </h2>
             <p className="text-slate-300 leading-relaxed text-base sm:text-lg">
@@ -88,11 +88,11 @@ export default function About() {
               custom={i}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: false, margin: "-50px" }}
               variants={itemVariants}
               className="relative pl-6 border-l-2 border-[#1e6fdb]/50"
             >
-              <span className="text-[#1e6fdb] text-3xl font-black opacity-30 leading-none">
+              <span className="text-[#1e6fdb] text-3xl font-bold opacity-30 leading-none">
                 {item.num}
               </span>
               <h3 className="text-white font-bold text-lg mt-1 mb-2">
@@ -109,7 +109,7 @@ export default function About() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="mt-20 grid grid-cols-1 sm:grid-cols-2 gap-8"
         >
@@ -119,7 +119,6 @@ export default function About() {
             </h3>
             <p
               className="text-slate-200 text-base sm:text-lg leading-relaxed italic"
-              style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               &ldquo;Transformar ideas en realidad mediante el diseño y la construcción de
               techos y domos que desafían los límites convencionales, integrando soluciones
@@ -133,7 +132,6 @@ export default function About() {
             </h3>
             <p
               className="text-slate-200 text-base sm:text-lg leading-relaxed italic"
-              style={{ fontFamily: "var(--font-playfair), serif" }}
             >
               &ldquo;Convertirnos en el referente nacional de diseño y construcción de
               cubiertas y domos arquitectónicos, reconocidos por nuestra innovación, calidad

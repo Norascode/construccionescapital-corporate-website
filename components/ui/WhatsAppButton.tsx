@@ -1,11 +1,9 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface WhatsAppButtonProps {
-  salesNumber: string;
-  supportNumber: string;
+  phoneNumber: string;
 }
 
 function WhatsAppIcon({ size = 28 }: { size?: number }) {
@@ -21,77 +19,22 @@ function WhatsAppIcon({ size = 28 }: { size?: number }) {
   );
 }
 
-export default function WhatsAppButton({
-  salesNumber,
-  supportNumber,
-}: WhatsAppButtonProps) {
-  const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  // Close on outside click
-  useEffect(() => {
-    if (!open) return;
-    const handleClick = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, [open]);
-
-  const salesUrl = `https://wa.me/${salesNumber}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`;
-  const supportUrl = `https://wa.me/${supportNumber}?text=${encodeURIComponent("Hola, necesito soporte técnico.")}`;
+export default function WhatsAppButton({ phoneNumber }: WhatsAppButtonProps) {
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`;
 
   return (
-    <div
-      ref={containerRef}
-      className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3"
-    >
-      {/* Mini-menú */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="flex flex-col gap-2"
-          >
-            <a
-              href={salesUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white text-sm font-bold px-4 py-2.5 rounded-full shadow-lg shadow-black/30 transition-colors duration-200 whitespace-nowrap"
-            >
-              <WhatsAppIcon size={18} />
-              Ventas
-            </a>
-            <a
-              href={supportUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 bg-[#128C7E] hover:bg-[#0e7a6e] text-white text-sm font-bold px-4 py-2.5 rounded-full shadow-lg shadow-black/30 transition-colors duration-200 whitespace-nowrap"
-            >
-              <WhatsAppIcon size={18} />
-              Soporte Técnico
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Botón principal con animación pulse */}
-      <button
-        onClick={() => setOpen((v) => !v)}
+    <div className="fixed bottom-6 right-6 z-50">
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="Contactar por WhatsApp"
         className="relative w-14 h-14 bg-[#25D366] hover:bg-[#1fbe59] rounded-full flex items-center justify-center shadow-lg shadow-black/30 transition-transform duration-200 hover:scale-110"
       >
         {/* Anillo de pulse */}
         <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30" />
         <WhatsAppIcon size={28} />
-      </button>
+      </a>
     </div>
   );
 }

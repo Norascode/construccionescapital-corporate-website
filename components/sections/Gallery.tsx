@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-type Category = "Todos" | "Techos" | "Pérgolas" | "Decks" | "Fachadas";
+type Category = "Todos" | "Techos" | "Pérgolas" | "Decks" | "Fachadas" | "Interiores";
 
 interface GalleryItem {
   id: number;
@@ -17,63 +17,76 @@ interface GalleryItem {
 const galleryItems: GalleryItem[] = [
   {
     id: 1,
-    src: "/images/IMG-20260326-WA0089.jpg",
+    src: "/images/pergola-02.jpg",
     alt: "Trabajadores instalando pérgola con cubierta de vidrio",
     category: "Pérgolas",
     project: "Pérgola con cubierta de vidrio y deck en madera",
   },
   {
     id: 2,
-    src: "/images/IMG-20260326-WA0106.jpg",
+    src: "/images/techo-02.jpg",
     alt: "Estructura metálica geométrica para cubierta",
     category: "Pérgolas",
     project: "Pérgola con cubierta de vidrio y deck en madera",
   },
   {
     id: 3,
-    src: "/images/IMG-20260326-WA0110.jpg",
+    src: "/images/pergola-04.jpg",
     alt: "Trabajador en escalera instalando techo",
     category: "Pérgolas",
     project: "Pérgola con cubierta de vidrio y deck en madera",
   },
   {
     id: 4,
-    src: "/images/1000537698.jpg",
+    src: "/images/pergola-01.jpg",
     alt: "Pérgola iluminada de noche con paneles LED y piso de madera",
     category: "Pérgolas",
     project: "Pérgola con cubierta de vidrio y deck en madera",
   },
   {
     id: 5,
-    src: "/images/IMG-20260326-WA0101.jpg",
+    src: "/images/deck-01.jpg",
     alt: "Deck de madera en construcción sobre estructura metálica",
     category: "Decks",
     project: "Deck en madera natural",
   },
   {
     id: 6,
-    src: "/images/1000537699.jpg",
+    src: "/images/techo-01.jpg",
     alt: "Skylight de vidrio en cocina con luz natural y árboles",
     category: "Techos",
     project: "Skylight para cocina integral",
   },
   {
     id: 7,
-    src: "/images/1000537830.jpg",
+    src: "/images/fachada-01.jpg",
     alt: "Restauración de fachada residencial",
     category: "Fachadas",
     project: "Restauración de fachada residencial",
   },
   {
     id: 8,
-    src: "/images/1000537672.jpg",
+    src: "/images/fachada-02.jpg",
     alt: "Casa con fachada colonial renovada",
     category: "Fachadas",
     project: "Casa con fachada colonial",
   },
+  { id: 9, src: "/images/pergola-03.jpg", alt: "Estructura de pérgola con jardín tropical", category: "Pérgolas", project: "Pérgola con cubierta de vidrio y deck en madera" },
+  { id: 10, src: "/images/pergola-05.jpg", alt: "Estructura metálica con cableado eléctrico", category: "Pérgolas", project: "Pérgola con cubierta de vidrio y deck en madera" },
+  { id: 11, src: "/images/techo-03.jpg", alt: "Trabajador estucando techo interior", category: "Techos", project: "Mantenimiento de techo interior" },
+  { id: 12, src: "/images/techo-04.jpg", alt: "Proceso de reparación de techo en 6 pasos", category: "Techos", project: "Reparación de techo" },
+  { id: 13, src: "/images/techo-05.jpg", alt: "Instalación de drywall en techo", category: "Techos", project: "Instalación de drywall" },
+  { id: 14, src: "/images/deck-02.jpg", alt: "Trabajador clavando tablas de deck", category: "Decks", project: "Pérgola con cubierta de vidrio y deck en madera" },
+  { id: 15, src: "/images/deck-03.jpg", alt: "Trabajadores terminando instalación de deck", category: "Decks", project: "Pérgola con cubierta de vidrio y deck en madera" },
+  { id: 16, src: "/images/deck-04.jpg", alt: "Trabajadores preparando madera para deck", category: "Decks", project: "Pérgola con cubierta de vidrio y deck en madera" },
+  { id: 17, src: "/images/deck-05.jpg", alt: "Base metálica para deck sobre gravilla", category: "Decks", project: "Pérgola con cubierta de vidrio y deck en madera" },
+  { id: 18, src: "/images/fachada-03.jpg", alt: "Casa de ladrillo con fachada", category: "Fachadas", project: "Casa con fachada colonial" },
+  { id: 19, src: "/images/techo-06.jpg", alt: "Trabajadores reparando cubierta exterior", category: "Techos", project: "Reparación de cubierta" },
+{ id: 20, src: "/images/interior-01.jpg", alt: "Remodelación de cocina: antes y después", category: "Interiores", project: "Remodelación de cocina integral" },
+  { id: 21, src: "/images/fachada-04.jpg", alt: "Reja ornamental en hierro forjado", category: "Fachadas", project: "Fachada con herrería ornamental" },
 ];
 
-const categories: Category[] = ["Todos", "Techos", "Pérgolas", "Decks", "Fachadas"];
+const categories: Category[] = ["Todos", "Techos", "Pérgolas", "Decks", "Fachadas", "Interiores"];
 
 export default function Gallery() {
   const [activeFilter, setActiveFilter] = useState<Category>("Todos");
@@ -124,14 +137,14 @@ export default function Gallery() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.6 }}
             className="mb-10"
           >
             <span className="inline-block text-[#60a5fa] text-xs font-bold uppercase tracking-[0.3em] mb-3">
               Nuestro Trabajo
             </span>
-            <h2 className="text-4xl sm:text-5xl font-black text-white leading-tight">
+            <h2 className="text-4xl sm:text-5xl font-bold uppercase text-white leading-tight">
               Proyectos Realizados
             </h2>
           </motion.div>
@@ -140,7 +153,7 @@ export default function Gallery() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex flex-wrap gap-2 mb-10"
           >
@@ -172,9 +185,10 @@ export default function Gallery() {
               {filtered.map((item, i) => (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.06 }}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: false, margin: "-50px" }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: i * 0.05 }}
                   className="break-inside-avoid mb-4 group relative cursor-pointer rounded-xl overflow-hidden"
                   onClick={() => setLightboxIndex(i)}
                 >
