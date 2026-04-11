@@ -2,6 +2,29 @@
 
 import { motion } from "framer-motion";
 
+interface ContactInfo {
+  sectionTitle?: string;
+  sectionSubtitle?: string;
+  address?: string;
+  email?: string;
+  mapAddress?: string;
+}
+
+interface SiteSettings {
+  whatsappSales?: string;
+  whatsappSupport?: string;
+  instagram?: string;
+  facebook?: string;
+  youtube?: string;
+  city?: string;
+  schedule?: string;
+}
+
+interface ContactProps {
+  contactInfo?: ContactInfo | null;
+  siteSettings?: SiteSettings | null;
+}
+
 function WhatsAppIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 shrink-0">
@@ -34,7 +57,16 @@ function YouTubeIcon() {
   );
 }
 
-export default function Contact() {
+export default function Contact({ contactInfo, siteSettings }: ContactProps) {
+  const phone = siteSettings?.whatsappSales || "573000000000";
+  const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`;
+
+  const instagramHref = siteSettings?.instagram || "#";
+  const facebookHref = siteSettings?.facebook || "#";
+  const youtubeHref = siteSettings?.youtube || "#";
+
+  const city = siteSettings?.city || "Medellín, Antioquia — Colombia";
+
   return (
     <section id="contacto" className="py-24 bg-[#141820] relative">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -46,10 +78,10 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
         >
           <span className="inline-block text-[#60a5fa] text-xs font-bold uppercase tracking-[0.3em] mb-3">
-            Contáctanos
+            {contactInfo?.sectionTitle || "Contáctanos"}
           </span>
           <h2 className="text-4xl sm:text-5xl font-bold uppercase text-white leading-tight mb-4">
-            ¿Tienes un proyecto en mente?
+            {contactInfo?.sectionSubtitle || "¿Tienes un proyecto en mente?"}
           </h2>
           <p className="text-slate-400 text-base sm:text-lg mb-10">
             Escríbenos por WhatsApp o síguenos en redes sociales.
@@ -65,7 +97,7 @@ export default function Contact() {
           className="flex justify-center mb-14"
         >
           <a
-            href="https://wa.me/573000000000?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20sus%20servicios."
+            href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
@@ -75,34 +107,72 @@ export default function Contact() {
           </a>
         </motion.div>
 
+        {/* Dirección y correo */}
+        {(contactInfo?.address || contactInfo?.email) && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col items-center gap-3 mb-14 text-sm text-slate-400"
+          >
+            {contactInfo?.address && (
+              <div className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 text-[#60a5fa]">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                  <circle cx="12" cy="9" r="2.5" />
+                </svg>
+                <span>{contactInfo.address}</span>
+              </div>
+            )}
+            {contactInfo?.email && (
+              <div className="flex items-center gap-2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 text-[#60a5fa]">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="M2 7l10 7 10-7" />
+                </svg>
+                <a href={`mailto:${contactInfo.email}`} className="hover:text-[#60a5fa] transition-colors duration-200">
+                  {contactInfo.email}
+                </a>
+              </div>
+            )}
+          </motion.div>
+        )}
+
         {/* Redes sociales */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.45 }}
         >
           <p className="text-slate-500 text-sm uppercase tracking-widest mb-5">
             Síguenos
           </p>
           <div className="flex justify-center gap-6 mb-8">
             <a
-              href="#"
+              href={instagramHref}
               aria-label="Instagram"
+              target={instagramHref !== "#" ? "_blank" : undefined}
+              rel={instagramHref !== "#" ? "noopener noreferrer" : undefined}
               className="text-slate-400 hover:text-[#60a5fa] transition-colors duration-200"
             >
               <InstagramIcon />
             </a>
             <a
-              href="#"
+              href={facebookHref}
               aria-label="Facebook"
+              target={facebookHref !== "#" ? "_blank" : undefined}
+              rel={facebookHref !== "#" ? "noopener noreferrer" : undefined}
               className="text-slate-400 hover:text-[#60a5fa] transition-colors duration-200"
             >
               <FacebookIcon />
             </a>
             <a
-              href="#"
+              href={youtubeHref}
               aria-label="YouTube"
+              target={youtubeHref !== "#" ? "_blank" : undefined}
+              rel={youtubeHref !== "#" ? "noopener noreferrer" : undefined}
               className="text-slate-400 hover:text-[#60a5fa] transition-colors duration-200"
             >
               <YouTubeIcon />
@@ -110,7 +180,7 @@ export default function Contact() {
           </div>
 
           <p className="text-slate-500 text-sm">
-            Medellín, Antioquia — Colombia
+            {city}
           </p>
         </motion.div>
       </div>

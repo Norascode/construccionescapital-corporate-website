@@ -3,8 +3,24 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { urlFor } from "@/sanity/lib/image";
 
-const slides = [
+interface SanitySlide {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image: any;
+  label: string;
+}
+
+interface HeroProps {
+  slogan?: string;
+  subtitle?: string;
+  ctaText?: string;
+  ctaSecondaryText?: string;
+  slides?: SanitySlide[];
+  phoneNumber?: string;
+}
+
+const fallbackSlides = [
   {
     src: "/images/pergola-01.jpg",
     alt: "Pérgola iluminada de noche con paneles LED y piso de madera",
@@ -36,7 +52,32 @@ function WhatsAppIcon() {
   );
 }
 
-export default function Hero() {
+export default function Hero({
+  slogan,
+  subtitle,
+  ctaText,
+  ctaSecondaryText,
+  slides: sanitySlides,
+  phoneNumber,
+}: HeroProps) {
+  const slides =
+    sanitySlides && sanitySlides.length >= 1
+      ? sanitySlides.map((slide, i) => ({
+          src: urlFor(slide.image).url(),
+          alt: slide.label,
+          num: String(i + 1).padStart(2, "0"),
+          label: slide.label,
+          objectPosition: "center center",
+        }))
+      : fallbackSlides;
+
+  const displaySlogan = slogan || "Transformamos espacios con precisión y diseño";
+  const displaySubtitle =
+    subtitle || "Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín.";
+  const displayCtaText = ctaText || "Contáctanos por WhatsApp";
+  const displayCtaSecondary = ctaSecondaryText || "Ver Proyectos";
+  const displayPhone = phoneNumber || "573000000000";
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
@@ -44,7 +85,7 @@ export default function Hero() {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
     }, 5500);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const scrollToGallery = () => {
     const el = document.querySelector("#galeria");
@@ -87,7 +128,7 @@ export default function Hero() {
       </div>
 
       {/* Logo — parte superior, mismo padding que todo el contenido */}
-      <div className="relative z-20 pt-2 px-8 md:px-16 lg:px-24">
+      <div className="relative z-20 pt-3 -mt-1 px-8 md:px-16 lg:px-24">
         <a
           href="#inicio"
           onClick={(e) => {
@@ -116,9 +157,15 @@ export default function Hero() {
             className="font-sans font-semibold uppercase text-white leading-[1.05] tracking-[0.02em]"
             style={{ fontSize: "clamp(2.2rem, 4.2vw, 5rem)" }}
           >
-            <span className="block whitespace-nowrap">Transformamos espacios</span>
-            <span className="block">con precisión</span>
-            <span className="block">y diseño</span>
+            {slogan ? (
+              <span className="block">{displaySlogan}</span>
+            ) : (
+              <>
+                <span className="block whitespace-nowrap">Transformamos espacios</span>
+                <span className="block">con precisión</span>
+                <span className="block">y diseño</span>
+              </>
+            )}
           </motion.h1>
 
           <motion.p
@@ -127,8 +174,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.45 }}
             className="mt-4 text-base sm:text-lg text-white font-medium leading-relaxed"
           >
-            Especialistas en domos, techos, pérgolas, decks y fachadas en
-            Medellín.
+            {displaySubtitle}
           </motion.p>
 
           <motion.div
@@ -138,19 +184,19 @@ export default function Hero() {
             className="mt-10 flex flex-wrap gap-4"
           >
             <a
-              href="https://wa.me/573000000000?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20informaci%C3%B3n%20sobre%20sus%20servicios."
+              href={`https://wa.me/${displayPhone}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
             >
               <WhatsAppIcon />
-              Contáctanos por WhatsApp
+              {displayCtaText}
             </a>
             <button
               onClick={scrollToGallery}
               className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide"
             >
-              Ver Proyectos
+              {displayCtaSecondary}
             </button>
           </motion.div>
         </div>

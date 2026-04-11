@@ -28,10 +28,10 @@ export default defineType({
       type: "string",
     }),
     defineField({
-      name: "mapEmbedUrl",
-      title: "URL del mapa de Google Maps (embed)",
-      type: "url",
-      description: "URL del iframe de Google Maps para mostrar la ubicación",
+      name: "mapAddress",
+      title: "Dirección para el mapa",
+      type: "string",
+      description: "Escribe la dirección completa. El mapa se generará automáticamente. Ejemplo: Calle 10 #43-12, Laureles, Medellín",
     }),
   ],
   preview: {

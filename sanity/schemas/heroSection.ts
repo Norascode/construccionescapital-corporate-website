@@ -34,6 +34,7 @@ export default defineType({
       name: "slides",
       title: "Slides del carrusel",
       type: "array",
+      validation: (Rule) => Rule.min(3).error("El carrusel necesita mínimo 3 imágenes con sus descripciones"),
       of: [
         {
           type: "object",
@@ -43,12 +44,14 @@ export default defineType({
               title: "Imagen",
               type: "image",
               options: { hotspot: true },
+              validation: (Rule) => Rule.required().error("La imagen es obligatoria"),
             }),
             defineField({
               name: "label",
               title: "Etiqueta del indicador",
               type: "string",
               description: "Ej: Pérgola residencial",
+              validation: (Rule) => Rule.required().error("La descripción es obligatoria"),
             }),
           ],
           preview: {

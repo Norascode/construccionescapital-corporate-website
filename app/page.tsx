@@ -7,21 +7,45 @@ import Gallery from "@/components/sections/Gallery";
 import Contact from "@/components/sections/Contact";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import ScrollToTop from "@/components/ui/ScrollToTop";
+import {
+  fetchSiteSettings,
+  fetchHeroSection,
+  fetchServices,
+  fetchAboutSection,
+  fetchProjects,
+  fetchContactInfo,
+} from "@/sanity/lib/fetch";
 
-export default function Home() {
+export default async function Home() {
+  const [siteSettings, heroSection, services, aboutSection, projects, contactInfo] =
+    await Promise.all([
+      fetchSiteSettings(),
+      fetchHeroSection(),
+      fetchServices(),
+      fetchAboutSection(),
+      fetchProjects(),
+      fetchContactInfo(),
+    ]);
+
   return (
     <>
       <Navbar />
       <main>
-        <Hero />
-        <Services />
-        <About />
-        <Gallery />
-        <Contact />
+        <Hero
+          slogan={heroSection?.slogan}
+          subtitle={heroSection?.subtitle}
+          ctaText={heroSection?.ctaText}
+          ctaSecondaryText={heroSection?.ctaSecondaryText}
+          slides={heroSection?.slides}
+          phoneNumber={siteSettings?.whatsappSales}
+        />
+        <Services services={services} />
+        <About aboutData={aboutSection} />
+        <Gallery projects={projects} />
+        <Contact contactInfo={contactInfo} siteSettings={siteSettings} />
       </main>
-      <Footer />
-      {/* Botón flotante de WhatsApp — número placeholder hasta conectar Sanity */}
-      <WhatsAppButton phoneNumber="573000000000" />
+      <Footer siteSettings={siteSettings} contactInfo={contactInfo} />
+      <WhatsAppButton phoneNumber={siteSettings?.whatsappSales} />
       <ScrollToTop />
     </>
   );

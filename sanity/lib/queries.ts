@@ -69,6 +69,6 @@ export const contactInfoQuery = groq`
     sectionSubtitle,
     address,
     email,
-    mapEmbedUrl
+    mapAddress
   }
 `;

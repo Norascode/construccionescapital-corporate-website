@@ -2,8 +2,22 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { urlFor } from "@/sanity/lib/image";
 
-const services = [
+interface SanityService {
+  _id: string;
+  name: string;
+  description: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image: any;
+  order: number;
+}
+
+interface ServicesProps {
+  services?: SanityService[] | null;
+}
+
+const fallbackServices = [
   {
     id: 1,
     name: "Domos y Techos en Vidrio",
@@ -38,7 +52,18 @@ const services = [
   },
 ];
 
-export default function Services() {
+export default function Services({ services: sanityServices }: ServicesProps) {
+  const items =
+    sanityServices && sanityServices.length > 0
+      ? sanityServices.map((s, i) => ({
+          id: i + 1,
+          name: s.name,
+          description: s.description,
+          image: urlFor(s.image).url(),
+          alt: s.name,
+        }))
+      : fallbackServices;
+
   return (
     <section id="servicios" className="py-24 bg-[#141820] relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -60,7 +85,7 @@ export default function Services() {
 
         {/* Layout alternado */}
         <div className="flex flex-col gap-16 lg:gap-20">
-          {services.map((service, i) => (
+          {items.map((service, i) => (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, y: 40 }}

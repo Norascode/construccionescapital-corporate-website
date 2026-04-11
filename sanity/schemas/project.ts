@@ -27,6 +27,7 @@ export default defineType({
           { title: "Decks", value: "Decks" },
           { title: "Fachadas", value: "Fachadas" },
           { title: "Domos", value: "Domos" },
+          { title: "Interiores", value: "Interiores" },
         ],
         layout: "dropdown",
       },

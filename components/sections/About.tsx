@@ -2,8 +2,28 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { urlFor } from "@/sanity/lib/image";
 
-const differentiators = [
+interface SanityDifferentiator {
+  title: string;
+  description: string;
+}
+
+interface AboutData {
+  title?: string;
+  description?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  image?: any;
+  differentiators?: SanityDifferentiator[];
+  mission?: string;
+  vision?: string;
+}
+
+interface AboutProps {
+  aboutData?: AboutData | null;
+}
+
+const fallbackDifferentiators = [
   {
     num: "01",
     title: "Visión Técnica y Creativa",
@@ -33,7 +53,34 @@ const itemVariants = {
   }),
 };
 
-export default function About() {
+export default function About({ aboutData }: AboutProps) {
+  const imageSrc = aboutData?.image
+    ? urlFor(aboutData.image).url()
+    : "/images/pergola-04.jpg";
+
+  const title = aboutData?.title || "Quiénes Somos";
+
+  const description =
+    aboutData?.description ||
+    "En Construcciones Capital, somos un equipo especializado en la transformación de espacios arquitectónicos. Combinamos precisión técnica con visión estética para diseñar soluciones que optimizan la entrada de luz natural y garantizan la integridad estructural frente a los elementos. No solo instalamos o reparamos — diseñamos soluciones a medida para cada proyecto.";
+
+  const differentiators =
+    aboutData?.differentiators && aboutData.differentiators.length > 0
+      ? aboutData.differentiators.map((d, i) => ({
+          num: String(i + 1).padStart(2, "0"),
+          title: d.title,
+          description: d.description,
+        }))
+      : fallbackDifferentiators;
+
+  const mission =
+    aboutData?.mission ||
+    "Transformar ideas en realidad mediante el diseño y la construcción de techos y domos que desafían los límites convencionales, integrando soluciones arquitectónicas innovadoras y sostenibles para mejorar la calidad de vida de nuestros clientes.";
+
+  const vision =
+    aboutData?.vision ||
+    "Convertirnos en el referente nacional de diseño y construcción de cubiertas y domos arquitectónicos, reconocidos por nuestra innovación, calidad excepcional y compromiso con la sostenibilidad.";
+
   return (
     <section id="nosotros" className="py-24 bg-[#16213e] relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -48,7 +95,7 @@ export default function About() {
             className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl shadow-black/40"
           >
             <Image
-              src="/images/pergola-04.jpg"
+              src={imageSrc}
               alt="Trabajador instalando estructura de techo"
               fill
               className="object-cover"
@@ -68,14 +115,10 @@ export default function About() {
               Sobre Nosotros
             </span>
             <h2 className="text-4xl sm:text-5xl font-bold uppercase text-white leading-tight mb-6">
-              Quiénes Somos
+              {title}
             </h2>
             <p className="text-slate-300 leading-relaxed text-base sm:text-lg">
-              En Construcciones Capital, somos un equipo especializado en la transformación
-              de espacios arquitectónicos. Combinamos precisión técnica con visión estética
-              para diseñar soluciones que optimizan la entrada de luz natural y garantizan
-              la integridad estructural frente a los elementos. No solo instalamos o
-              reparamos — diseñamos soluciones a medida para cada proyecto.
+              {description}
             </p>
           </motion.div>
         </div>
@@ -117,25 +160,16 @@ export default function About() {
             <h3 className="text-[#60a5fa] text-xs font-bold uppercase tracking-[0.25em] mb-4">
               Nuestra Misión
             </h3>
-            <p
-              className="text-slate-200 text-base sm:text-lg leading-relaxed italic"
-            >
-              &ldquo;Transformar ideas en realidad mediante el diseño y la construcción de
-              techos y domos que desafían los límites convencionales, integrando soluciones
-              arquitectónicas innovadoras y sostenibles para mejorar la calidad de vida de
-              nuestros clientes.&rdquo;
+            <p className="text-slate-200 text-base sm:text-lg leading-relaxed italic">
+              &ldquo;{mission}&rdquo;
             </p>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
             <h3 className="text-[#60a5fa] text-xs font-bold uppercase tracking-[0.25em] mb-4">
               Nuestra Visión
             </h3>
-            <p
-              className="text-slate-200 text-base sm:text-lg leading-relaxed italic"
-            >
-              &ldquo;Convertirnos en el referente nacional de diseño y construcción de
-              cubiertas y domos arquitectónicos, reconocidos por nuestra innovación, calidad
-              excepcional y compromiso con la sostenibilidad.&rdquo;
+            <p className="text-slate-200 text-base sm:text-lg leading-relaxed italic">
+              &ldquo;{vision}&rdquo;
             </p>
           </div>
         </motion.div>

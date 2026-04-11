@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { urlFor } from "@/sanity/lib/image";
 
 type Category = "Todos" | "Techos" | "Pérgolas" | "Decks" | "Fachadas" | "Interiores";
 
@@ -14,7 +15,19 @@ interface GalleryItem {
   project: string;
 }
 
-const galleryItems: GalleryItem[] = [
+interface SanityProject {
+  _id: string;
+  name: string;
+  category: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  images: any[];
+}
+
+interface GalleryProps {
+  projects?: SanityProject[] | null;
+}
+
+const fallbackGalleryItems: GalleryItem[] = [
   {
     id: 1,
     src: "/images/pergola-02.jpg",
@@ -82,13 +95,30 @@ const galleryItems: GalleryItem[] = [
   { id: 17, src: "/images/deck-05.jpg", alt: "Base metálica para deck sobre gravilla", category: "Decks", project: "Pérgola con cubierta de vidrio y deck en madera" },
   { id: 18, src: "/images/fachada-03.jpg", alt: "Casa de ladrillo con fachada", category: "Fachadas", project: "Casa con fachada colonial" },
   { id: 19, src: "/images/techo-06.jpg", alt: "Trabajadores reparando cubierta exterior", category: "Techos", project: "Reparación de cubierta" },
-{ id: 20, src: "/images/interior-01.jpg", alt: "Remodelación de cocina: antes y después", category: "Interiores", project: "Remodelación de cocina integral" },
+  { id: 20, src: "/images/interior-01.jpg", alt: "Remodelación de cocina: antes y después", category: "Interiores", project: "Remodelación de cocina integral" },
   { id: 21, src: "/images/fachada-04.jpg", alt: "Reja ornamental en hierro forjado", category: "Fachadas", project: "Fachada con herrería ornamental" },
 ];
 
 const categories: Category[] = ["Todos", "Techos", "Pérgolas", "Decks", "Fachadas", "Interiores"];
 
-export default function Gallery() {
+const VALID_CATEGORIES = new Set<string>(["Techos", "Pérgolas", "Decks", "Fachadas", "Interiores"]);
+
+export default function Gallery({ projects: sanityProjects }: GalleryProps) {
+  const galleryItems: GalleryItem[] =
+    sanityProjects && sanityProjects.length > 0
+      ? sanityProjects.flatMap((project, pi) =>
+          (project.images || []).map((img, ii) => ({
+            id: pi * 1000 + ii,
+            src: urlFor(img).url(),
+            alt: project.name,
+            category: (VALID_CATEGORIES.has(project.category)
+              ? project.category
+              : "Techos") as Exclude<Category, "Todos">,
+            project: project.name,
+          }))
+        )
+      : fallbackGalleryItems;
+
   const [activeFilter, setActiveFilter] = useState<Category>("Todos");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 

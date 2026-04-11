@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 interface WhatsAppButtonProps {
-  phoneNumber: string;
+  phoneNumber?: string;
 }
 
 function WhatsAppIcon({ size = 28 }: { size?: number }) {
@@ -19,7 +19,7 @@ function WhatsAppIcon({ size = 28 }: { size?: number }) {
   );
 }
 
-export default function WhatsAppButton({ phoneNumber }: WhatsAppButtonProps) {
+export default function WhatsAppButton({ phoneNumber = "573000000000" }: WhatsAppButtonProps) {
   const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`;
 
   return (
