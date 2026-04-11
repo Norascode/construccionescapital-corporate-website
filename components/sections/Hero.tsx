@@ -12,10 +12,10 @@ interface SanitySlide {
 }
 
 interface HeroProps {
-  slogan?: string;
+  sloganLine1?: string;
+  sloganLine2?: string;
+  sloganLine3?: string;
   subtitle?: string;
-  ctaText?: string;
-  ctaSecondaryText?: string;
   slides?: SanitySlide[];
   phoneNumber?: string;
   logo?: any;
@@ -54,10 +54,10 @@ function WhatsAppIcon() {
 }
 
 export default function Hero({
-  slogan,
+  sloganLine1,
+  sloganLine2,
+  sloganLine3,
   subtitle,
-  ctaText,
-  ctaSecondaryText,
   slides: sanitySlides,
   phoneNumber,
   logo,
@@ -73,11 +73,11 @@ export default function Hero({
         }))
       : fallbackSlides;
 
-  const displaySlogan = slogan || "Transformamos espacios con precisión y diseño";
+  const line1 = sloganLine1 || "Transformamos espacios";
+  const line2 = sloganLine2 || "";
+  const line3 = sloganLine3 || "";
   const displaySubtitle =
     subtitle || "Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín.";
-  const displayCtaText = ctaText || "Contáctanos por WhatsApp";
-  const displayCtaSecondary = ctaSecondaryText || "Ver Proyectos";
   const displayPhone = phoneNumber || "573000000000";
   const logoSrc = logo ? urlFor(logo).width(560).url() : "/images/logo.png";
 
@@ -160,15 +160,9 @@ export default function Hero({
             className="font-sans font-semibold uppercase text-white leading-[1.05] tracking-[0.02em]"
             style={{ fontSize: "clamp(2.2rem, 4.2vw, 5rem)" }}
           >
-            {slogan ? (
-              <span className="block">{displaySlogan}</span>
-            ) : (
-              <>
-                <span className="block whitespace-nowrap">Transformamos espacios</span>
-                <span className="block">con precisión</span>
-                <span className="block">y diseño</span>
-              </>
-            )}
+            <span className="block">{line1}</span>
+            {line2 && <span className="block">{line2}</span>}
+            {line3 && <span className="block">{line3}</span>}
           </motion.h1>
 
           <motion.p
@@ -193,13 +187,13 @@ export default function Hero({
               className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
             >
               <WhatsAppIcon />
-              {displayCtaText}
+              Contáctanos por WhatsApp
             </a>
             <button
               onClick={scrollToGallery}
               className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide"
             >
-              {displayCtaSecondary}
+              Ver Proyectos
             </button>
           </motion.div>
         </div>

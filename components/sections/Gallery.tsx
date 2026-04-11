@@ -13,6 +13,7 @@ interface GalleryItem {
   alt: string;
   category: Exclude<Category, "Todos">;
   project: string;
+  youtubeUrl?: string;
 }
 
 interface SanityProject {
@@ -21,6 +22,7 @@ interface SanityProject {
   category: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   images: any[];
+  youtubeUrl?: string;
 }
 
 interface GalleryProps {
@@ -103,20 +105,40 @@ const categories: Category[] = ["Todos", "Techos", "Pérgolas", "Decks", "Fachad
 
 const VALID_CATEGORIES = new Set<string>(["Techos", "Pérgolas", "Decks", "Fachadas", "Interiores"]);
 
+function getYouTubeId(url: string): string | null {
+  const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/);
+  return match ? match[1] : null;
+}
+
 export default function Gallery({ projects: sanityProjects }: GalleryProps) {
   const galleryItems: GalleryItem[] =
     sanityProjects && sanityProjects.length > 0
-      ? sanityProjects.flatMap((project, pi) =>
-          (project.images || []).map((img, ii) => ({
+      ? sanityProjects.flatMap((project, pi) => {
+          const category = (VALID_CATEGORIES.has(project.category)
+            ? project.category
+            : "Techos") as Exclude<Category, "Todos">;
+          const imageItems: GalleryItem[] = (project.images || []).map((img, ii) => ({
             id: pi * 1000 + ii,
             src: urlFor(img).url(),
             alt: project.name,
-            category: (VALID_CATEGORIES.has(project.category)
-              ? project.category
-              : "Techos") as Exclude<Category, "Todos">,
+            category,
             project: project.name,
-          }))
-        )
+          }));
+          if (project.youtubeUrl) {
+            const videoId = getYouTubeId(project.youtubeUrl);
+            if (videoId) {
+              imageItems.push({
+                id: pi * 1000 + 999,
+                src: `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`,
+                alt: `${project.name} - Video`,
+                category,
+                project: project.name,
+                youtubeUrl: project.youtubeUrl,
+              });
+            }
+          }
+          return imageItems;
+        })
       : fallbackGalleryItems;
 
   const [activeFilter, setActiveFilter] = useState<Category>("Todos");
@@ -230,6 +252,16 @@ export default function Gallery({ projects: sanityProjects }: GalleryProps) {
                     className="w-full h-auto block transition-transform duration-500 group-hover:scale-105"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
+                  {/* Ícono de play para items de video */}
+                  {item.youtubeUrl && (
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                      <div className="w-14 h-14 rounded-full bg-black/50 flex items-center justify-center group-hover:bg-black/70 transition-colors duration-300">
+                        <svg viewBox="0 0 24 24" fill="white" className="w-7 h-7 ml-1">
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                   {/* Overlay en hover */}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-300 flex items-end">
                     <div className="p-4 translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
@@ -281,7 +313,7 @@ export default function Gallery({ projects: sanityProjects }: GalleryProps) {
               </button>
             )}
 
-            {/* Imagen */}
+            {/* Contenido: video o imagen */}
             <motion.div
               key={lightboxIndex}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -291,15 +323,25 @@ export default function Gallery({ projects: sanityProjects }: GalleryProps) {
               className="relative max-w-5xl max-h-[85vh] w-full mx-16 flex items-center justify-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image
-                src={filtered[lightboxIndex].src}
-                alt={filtered[lightboxIndex].alt}
-                width={1200}
-                height={900}
-                className="object-contain max-h-[85vh] w-auto rounded-lg shadow-2xl"
-                sizes="90vw"
-                priority
-              />
+              {filtered[lightboxIndex].youtubeUrl ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${getYouTubeId(filtered[lightboxIndex].youtubeUrl!)}?autoplay=1&rel=0`}
+                  title={filtered[lightboxIndex].alt}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full max-w-4xl aspect-video rounded-lg"
+                />
+              ) : (
+                <Image
+                  src={filtered[lightboxIndex].src}
+                  alt={filtered[lightboxIndex].alt}
+                  width={1200}
+                  height={900}
+                  className="object-contain max-h-[85vh] w-auto rounded-lg shadow-2xl"
+                  sizes="90vw"
+                  priority
+                />
+              )}
             </motion.div>
 
             {/* Botón siguiente */}

@@ -14,10 +14,10 @@ export const siteSettingsQuery = groq`
 
 export const heroSectionQuery = groq`
   *[_type == "heroSection"][0] {
-    slogan,
+    sloganLine1,
+    sloganLine2,
+    sloganLine3,
     subtitle,
-    ctaText,
-    ctaSecondaryText,
     slides[] {
       image,
       label

@@ -44,10 +44,10 @@ export default async function Home() {
       <Navbar />
       <main>
         <Hero
-          slogan={heroSection?.slogan}
+          sloganLine1={heroSection?.sloganLine1}
+          sloganLine2={heroSection?.sloganLine2}
+          sloganLine3={heroSection?.sloganLine3}
           subtitle={heroSection?.subtitle}
-          ctaText={heroSection?.ctaText}
-          ctaSecondaryText={heroSection?.ctaSecondaryText}
           slides={heroSection?.slides}
           phoneNumber={siteSettings?.whatsappSales}
           logo={siteSettings?.logo}

@@ -6,10 +6,25 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
-      name: "slogan",
-      title: "Eslogan principal",
+      name: "sloganLine1",
+      title: "Eslogan — Línea 1 (la más larga)",
       type: "string",
-      initialValue: "TRANSFORMAMOS ESPACIOS CON PRECISIÓN Y DISEÑO",
+      initialValue: "TRANSFORMAMOS ESPACIOS",
+      description: "Primera línea del eslogan. Recomendado: 2-3 palabras largas.",
+    }),
+    defineField({
+      name: "sloganLine2",
+      title: "Eslogan — Línea 2",
+      type: "string",
+      initialValue: "CON PRECISIÓN",
+      description: "Segunda línea, más corta que la primera.",
+    }),
+    defineField({
+      name: "sloganLine3",
+      title: "Eslogan — Línea 3 (la más corta)",
+      type: "string",
+      initialValue: "Y DISEÑO",
+      description: "Tercera línea, la más corta de las tres.",
     }),
     defineField({
       name: "subtitle",
@@ -17,18 +32,6 @@ export default defineType({
       type: "string",
       initialValue:
         "Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín.",
-    }),
-    defineField({
-      name: "ctaText",
-      title: "Texto botón principal",
-      type: "string",
-      initialValue: "Contáctanos por WhatsApp",
-    }),
-    defineField({
-      name: "ctaSecondaryText",
-      title: "Texto botón secundario",
-      type: "string",
-      initialValue: "Ver Proyectos",
     }),
     defineField({
       name: "slides",
