@@ -18,6 +18,7 @@ interface HeroProps {
   ctaSecondaryText?: string;
   slides?: SanitySlide[];
   phoneNumber?: string;
+  logo?: any;
 }
 
 const fallbackSlides = [
@@ -59,6 +60,7 @@ export default function Hero({
   ctaSecondaryText,
   slides: sanitySlides,
   phoneNumber,
+  logo,
 }: HeroProps) {
   const slides =
     sanitySlides && sanitySlides.length >= 1
@@ -77,6 +79,7 @@ export default function Hero({
   const displayCtaText = ctaText || "Contáctanos por WhatsApp";
   const displayCtaSecondary = ctaSecondaryText || "Ver Proyectos";
   const displayPhone = phoneNumber || "573000000000";
+  const logoSrc = logo ? urlFor(logo).width(560).url() : "/images/logo.png";
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -137,7 +140,7 @@ export default function Hero({
           }}
         >
           <Image
-            src="/images/logo.png"
+            src={logoSrc}
             alt="Construcciones Capital"
             width={280}
             height={100}

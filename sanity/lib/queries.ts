@@ -5,11 +5,9 @@ export const siteSettingsQuery = groq`
     siteName,
     logo,
     whatsappSales,
-    whatsappSupport,
     instagram,
     facebook,
     youtube,
-    city,
     schedule
   }
 `;
@@ -69,6 +67,7 @@ export const contactInfoQuery = groq`
     sectionSubtitle,
     address,
     email,
-    mapAddress
+    mapAddress,
+    city
   }
 `;

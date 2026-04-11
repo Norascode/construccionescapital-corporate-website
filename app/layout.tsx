@@ -14,6 +14,10 @@ export const metadata: Metadata = {
   description:
     "Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín, Colombia. Transformamos espacios con precisión y diseño.",
   keywords: ["domos", "techos", "pérgolas", "decks", "fachadas", "Medellín", "construcciones"],
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({

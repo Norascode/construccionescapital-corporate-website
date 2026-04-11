@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 interface SiteSettings {
   instagram?: string;
@@ -8,12 +9,14 @@ interface SiteSettings {
   whatsappSales?: string;
   city?: string;
   schedule?: string;
+  logo?: any;
 }
 
 interface ContactInfo {
   address?: string;
   email?: string;
   mapAddress?: string;
+  city?: string;
 }
 
 interface FooterProps {
@@ -58,8 +61,11 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
   const facebookHref = siteSettings?.facebook || "#";
   const youtubeHref = siteSettings?.youtube || "#";
   const phone = siteSettings?.whatsappSales || "573000000000";
+  const logoSrc = siteSettings?.logo
+    ? urlFor(siteSettings.logo).width(560).url()
+    : "/images/logo.png";
 
-  const addressLine1 = contactInfo?.address || siteSettings?.city || "Medellín, Antioquia — Colombia";
+  const addressLine1 = contactInfo?.address || contactInfo?.city || "Medellín, Antioquia — Colombia";
   const addressLine2 = undefined;
 
   const scheduleLines = siteSettings?.schedule
@@ -75,7 +81,7 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
           <div className="flex flex-col gap-4">
             <Link href="/admin">
               <Image
-                src="/images/logo.png"
+                src={logoSrc}
                 alt="Construcciones Capital"
                 width={280}
                 height={100}

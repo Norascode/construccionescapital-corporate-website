@@ -19,15 +19,9 @@ export default defineType({
     }),
     defineField({
       name: "whatsappSales",
-      title: "WhatsApp Ventas (Nora)",
+      title: "Número de WhatsApp",
       type: "string",
-      description: "Formato internacional: 573001234567",
-    }),
-    defineField({
-      name: "whatsappSupport",
-      title: "WhatsApp Soporte Técnico",
-      type: "string",
-      description: "Formato internacional: 573001234567",
+      description: "Número para todos los botones de WhatsApp del sitio. Formato internacional: 573001234567",
     }),
     defineField({
       name: "instagram",
@@ -43,12 +37,6 @@ export default defineType({
       name: "youtube",
       title: "Link de YouTube",
       type: "url",
-    }),
-    defineField({
-      name: "city",
-      title: "Ciudad",
-      type: "string",
-      initialValue: "Medellín, Antioquia — Colombia",
     }),
     defineField({
       name: "schedule",

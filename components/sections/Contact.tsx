@@ -8,15 +8,14 @@ interface ContactInfo {
   address?: string;
   email?: string;
   mapAddress?: string;
+  city?: string;
 }
 
 interface SiteSettings {
   whatsappSales?: string;
-  whatsappSupport?: string;
   instagram?: string;
   facebook?: string;
   youtube?: string;
-  city?: string;
   schedule?: string;
 }
 
@@ -65,7 +64,7 @@ export default function Contact({ contactInfo, siteSettings }: ContactProps) {
   const facebookHref = siteSettings?.facebook || "#";
   const youtubeHref = siteSettings?.youtube || "#";
 
-  const city = siteSettings?.city || "Medellín, Antioquia — Colombia";
+  const city = contactInfo?.city || "Medellín, Antioquia — Colombia";
 
   return (
     <section id="contacto" className="py-24 bg-[#141820] relative">

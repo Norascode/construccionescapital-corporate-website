@@ -33,6 +33,12 @@ export default defineType({
       type: "string",
       description: "Escribe la dirección completa. El mapa se generará automáticamente. Ejemplo: Calle 10 #43-12, Laureles, Medellín",
     }),
+    defineField({
+      name: "city",
+      title: "Ciudad",
+      type: "string",
+      initialValue: "Medellín, Antioquia — Colombia",
+    }),
   ],
   preview: {
     prepare: () => ({ title: "Información de Contacto" }),

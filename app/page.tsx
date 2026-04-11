@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Hero from "@/components/sections/Hero";
@@ -15,6 +16,17 @@ import {
   fetchProjects,
   fetchContactInfo,
 } from "@/sanity/lib/fetch";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const siteSettings = await fetchSiteSettings();
+  const siteName = siteSettings?.siteName || "Construcciones Capital";
+
+  return {
+    title: `${siteName} — Domos, Techos, Pérgolas y Decks en Medellín`,
+    description:
+      "Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín, Colombia. Transformamos espacios con precisión y diseño.",
+  };
+}
 
 export default async function Home() {
   const [siteSettings, heroSection, services, aboutSection, projects, contactInfo] =
@@ -38,6 +50,7 @@ export default async function Home() {
           ctaSecondaryText={heroSection?.ctaSecondaryText}
           slides={heroSection?.slides}
           phoneNumber={siteSettings?.whatsappSales}
+          logo={siteSettings?.logo}
         />
         <Services services={services} />
         <About aboutData={aboutSection} />
