@@ -17,41 +17,6 @@ interface ServicesProps {
   services?: SanityService[] | null;
 }
 
-const fallbackServices = [
-  {
-    id: 1,
-    name: "Domos y Techos en Vidrio",
-    description:
-      "Diseño y montaje de cubiertas en vidrio templado y policarbonato sobre estructura metálica. Soluciones que optimizan la entrada de luz natural y garantizan integridad estructural.",
-    image: "/images/techo-01.jpg",
-    alt: "Skylight de vidrio en cocina con luz natural",
-  },
-  {
-    id: 2,
-    name: "Pérgolas y Estructuras de Exterior",
-    description:
-      "Construcción de pérgolas con estructura metálica y cubierta de vidrio, integradas al diseño arquitectónico de tu espacio exterior.",
-    image: "/images/pergola-01.jpg",
-    alt: "Pérgola iluminada de noche con paneles LED",
-  },
-  {
-    id: 3,
-    name: "Decks en Madera",
-    description:
-      "Instalación de pisos en madera natural sobre estructura metálica para terrazas, jardines y espacios exteriores.",
-    image: "/images/deck-01.jpg",
-    alt: "Deck de madera en construcción",
-  },
-  {
-    id: 4,
-    name: "Fachadas y Mantenimiento Exterior",
-    description:
-      "Restauración integral de fachadas residenciales y corporativas. Mantenimiento avanzado de exteriores para la valorización de tu inmueble.",
-    image: "/images/fachada-01.jpg",
-    alt: "Fachada antes y después de restauración",
-  },
-];
-
 export default function Services({ services: sanityServices }: ServicesProps) {
   const items =
     sanityServices && sanityServices.length > 0
@@ -62,7 +27,7 @@ export default function Services({ services: sanityServices }: ServicesProps) {
           image: urlFor(s.image).url(),
           alt: s.name,
         }))
-      : fallbackServices;
+      : [];
 
   return (
     <section id="servicios" className="py-24 bg-[#141820] relative">

@@ -21,30 +21,6 @@ interface HeroProps {
   logo?: any;
 }
 
-const fallbackSlides = [
-  {
-    src: "/images/pergola-01.jpg",
-    alt: "Pérgola iluminada de noche con paneles LED y piso de madera",
-    num: "01",
-    label: "Pérgola residencial",
-    objectPosition: "center 15%",
-  },
-  {
-    src: "/images/techo-01.jpg",
-    alt: "Skylight de vidrio en cocina con luz natural y árboles",
-    num: "02",
-    label: "Skylight cocina integral",
-    objectPosition: "center top",
-  },
-  {
-    src: "/images/techo-02.jpg",
-    alt: "Estructura metálica geométrica contra cielo azul",
-    num: "03",
-    label: "Cubierta en vidrio templado",
-    objectPosition: "center top",
-  },
-];
-
 function WhatsAppIcon() {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0">
@@ -71,7 +47,7 @@ export default function Hero({
           label: slide.label,
           objectPosition: "center center",
         }))
-      : fallbackSlides;
+      : [];
 
   const line1 = sloganLine1 || "Transformamos espacios";
   const line2 = sloganLine2 || "";

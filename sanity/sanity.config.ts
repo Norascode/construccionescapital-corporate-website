@@ -19,15 +19,16 @@ export default defineConfig({
           .title("Contenido")
           .items([
             S.listItem()
-              .title("Configuración del Sitio")
+              .title("Configuración General")
               .id("siteSettings")
               .child(
                 S.document()
                   .schemaType("siteSettings")
                   .documentId("siteSettings")
               ),
+            S.divider(),
             S.listItem()
-              .title("Hero / Banner Principal")
+              .title("Inicio (Banner Principal)")
               .id("heroSection")
               .child(
                 S.document()
@@ -35,7 +36,13 @@ export default defineConfig({
                   .documentId("heroSection")
               ),
             S.listItem()
-              .title("Sección Nosotros")
+              .title("Servicios")
+              .id("services")
+              .child(
+                S.documentTypeList("service").title("Servicios")
+              ),
+            S.listItem()
+              .title("Nosotros")
               .id("aboutSection")
               .child(
                 S.document()
@@ -43,16 +50,19 @@ export default defineConfig({
                   .documentId("aboutSection")
               ),
             S.listItem()
-              .title("Información de Contacto")
+              .title("Galería")
+              .id("projects")
+              .child(
+                S.documentTypeList("project").title("Proyectos")
+              ),
+            S.listItem()
+              .title("Contacto")
               .id("contactInfo")
               .child(
                 S.document()
                   .schemaType("contactInfo")
                   .documentId("contactInfo")
               ),
-            S.divider(),
-            S.documentTypeListItem("service").title("Servicios"),
-            S.documentTypeListItem("project").title("Proyectos (Galería)"),
           ]),
     }),
     visionTool(),

@@ -23,27 +23,6 @@ interface AboutProps {
   aboutData?: AboutData | null;
 }
 
-const fallbackDifferentiators = [
-  {
-    num: "01",
-    title: "Visión Técnica y Creativa",
-    description:
-      "Entendemos que un domo o una fachada es tanto ingeniería como diseño.",
-  },
-  {
-    num: "02",
-    title: "Compromiso con la Durabilidad",
-    description:
-      "Materiales y procesos que aseguran una larga vida útil, reduciendo costos de mantenimiento.",
-  },
-  {
-    num: "03",
-    title: "Soluciones a Medida",
-    description:
-      "Cada proyecto se aborda desde un análisis técnico específico, adaptando materiales y métodos a la arquitectura del lugar.",
-  },
-];
-
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -71,7 +50,7 @@ export default function About({ aboutData }: AboutProps) {
           title: d.title,
           description: d.description,
         }))
-      : fallbackDifferentiators;
+      : [];
 
   const mission =
     aboutData?.mission ||
