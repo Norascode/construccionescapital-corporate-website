@@ -107,7 +107,7 @@ export default function Hero({
       </div>
 
       {/* Logo — parte superior, mismo padding que todo el contenido */}
-      <div className="relative z-20 pt-3 -mt-1 px-8 md:px-16 lg:px-24">
+      <div className="relative z-20 pt-6 px-6 sm:px-8 md:px-16 lg:px-24">
         <a
           href="#inicio"
           onClick={(e) => {
@@ -120,21 +120,21 @@ export default function Hero({
             alt="Construcciones Capital"
             width={280}
             height={100}
-            className="h-[80px] md:h-[160px] w-auto object-contain"
+            className="h-[45px] md:h-[80px] w-auto object-contain"
             priority
           />
         </a>
       </div>
 
       {/* Contenido principal — centrado verticalmente en el espacio restante */}
-      <div className="relative z-10 flex-1 flex items-start pt-4 md:pt-6 px-8 md:px-16 lg:px-24">
+      <div className="relative z-10 flex-1 flex items-center pb-28 sm:pb-32 px-6 sm:px-8 md:px-16 lg:px-24">
         <div className="max-w-[95%] sm:max-w-[90%] lg:max-w-[85%]">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             className="font-sans font-semibold uppercase text-white leading-[1.05] tracking-[0.02em]"
-            style={{ fontSize: "clamp(2.2rem, 4.2vw, 5rem)" }}
+            style={{ fontSize: "clamp(1.75rem, 4.2vw, 5rem)" }}
           >
             <span className="block">{line1}</span>
             {line2 && <span className="block">{line2}</span>}
@@ -154,20 +154,20 @@ export default function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.65 }}
-            className="mt-10 flex flex-wrap gap-4"
+            className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-4"
           >
             <a
               href={`https://wa.me/${displayPhone}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
+              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-full transition-colors duration-200 text-sm sm:text-base uppercase tracking-wide shadow-lg"
             >
               <WhatsAppIcon />
               Contáctanos por WhatsApp
             </a>
             <button
               onClick={scrollToGallery}
-              className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide"
+              className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-full transition-colors duration-200 text-sm sm:text-base uppercase tracking-wide"
             >
               Ver Proyectos
             </button>
@@ -176,8 +176,8 @@ export default function Hero({
       </div>
 
       {/* Indicadores de slide — parte inferior, mismo padding */}
-      <div className="relative z-10 pb-8 px-8 md:px-16 lg:px-24">
-        <div className="flex gap-6 sm:gap-10">
+      <div className="relative z-10 pb-6 sm:pb-8 px-6 sm:px-8 md:px-16 lg:px-24">
+        <div className="flex gap-4 sm:gap-6 md:gap-10">
           {slides.map((slide, i) => (
             <button
               key={i}

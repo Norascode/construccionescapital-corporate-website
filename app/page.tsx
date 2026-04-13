@@ -17,6 +17,11 @@ import {
   fetchContactInfo,
 } from "@/sanity/lib/fetch";
 
+// ISR: Revalida la página cada 60 segundos.
+// Cuando la clienta edita algo en Sanity CMS, el cambio se refleja
+// en el sitio público en máximo 60 segundos sin necesidad de redeploy.
+export const revalidate = 60;
+
 export async function generateMetadata(): Promise<Metadata> {
   const siteSettings = await fetchSiteSettings();
   const siteName = siteSettings?.siteName || "Construcciones Capital";

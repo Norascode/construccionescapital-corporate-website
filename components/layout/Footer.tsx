@@ -85,7 +85,7 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
                 alt="Construcciones Capital"
                 width={280}
                 height={100}
-                className="h-[80px] md:h-[120px] w-auto object-contain"
+                className="h-[45px] md:h-[65px] w-auto object-contain"
               />
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed">
@@ -166,8 +166,8 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
           <div>
             <iframe
               src={contactInfo?.mapAddress
-                ? `https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=${encodeURIComponent(contactInfo.mapAddress)}`
-                : "https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU17R8&q=Medell%C3%ADn%2C+Antioquia%2C+Colombia"
+                ? `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}&q=${encodeURIComponent(contactInfo.mapAddress)}`
+                : `https://www.google.com/maps/embed/v1/place?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || ""}&q=Medell%C3%ADn%2C+Antioquia%2C+Colombia`
               }
               width="100%"
               height="180"
