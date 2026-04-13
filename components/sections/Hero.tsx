@@ -107,7 +107,7 @@ export default function Hero({
       </div>
 
       {/* Logo — parte superior, mismo padding que todo el contenido */}
-      <div className="relative z-20 pt-6 px-6 sm:px-8 md:px-16 lg:px-24">
+      <div className="relative z-20 pt-6 md:pt-[clamp(12px,2.2vh,24px)] px-6 sm:px-8 md:px-16 lg:px-24">
         <a
           href="#inicio"
           onClick={(e) => {
@@ -120,14 +120,14 @@ export default function Hero({
             alt="Construcciones Capital"
             width={280}
             height={100}
-            className="h-[45px] md:h-[80px] w-auto object-contain"
+            className="h-[45px] md:h-[clamp(50px,7vh,80px)] w-auto object-contain"
             priority
           />
         </a>
       </div>
 
       {/* Contenido principal — centrado verticalmente en el espacio restante */}
-      <div className="relative z-10 flex-1 flex items-center pb-28 sm:pb-32 px-6 sm:px-8 md:px-16 lg:px-24">
+      <div className="relative z-10 flex-1 flex items-center pb-12 sm:pb-16 md:pb-[clamp(3rem,10vh,8rem)] px-6 sm:px-8 md:px-16 lg:px-24">
         <div className="max-w-[95%] sm:max-w-[90%] lg:max-w-[85%]">
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
@@ -145,7 +145,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.45 }}
-            className="mt-4 text-base sm:text-lg text-white font-medium leading-relaxed"
+            className="mt-4 md:mt-[clamp(8px,1.5vh,16px)] text-base md:text-[clamp(14px,1.7vh,18px)] text-white font-medium leading-relaxed"
           >
             {displaySubtitle}
           </motion.p>
@@ -154,20 +154,20 @@ export default function Hero({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.65 }}
-            className="mt-6 sm:mt-10 flex flex-wrap gap-3 sm:gap-4"
+            className="mt-6 md:mt-[clamp(20px,3.7vh,40px)] flex flex-wrap gap-3 sm:gap-4"
           >
             <a
               href={`https://wa.me/${displayPhone}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-full transition-colors duration-200 text-sm sm:text-base uppercase tracking-wide shadow-lg"
+              className="inline-flex items-center justify-center gap-2 w-fit bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-5 py-2.5 md:px-[clamp(16px,2.6vh,28px)] md:py-[clamp(8px,1.3vh,14px)] rounded-full transition-colors duration-200 text-sm md:text-[clamp(13px,1.5vh,16px)] uppercase tracking-wide shadow-lg whitespace-nowrap"
             >
               <WhatsAppIcon />
               Contáctanos por WhatsApp
             </a>
             <button
               onClick={scrollToGallery}
-              className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-full transition-colors duration-200 text-sm sm:text-base uppercase tracking-wide"
+              className="inline-flex items-center gap-2 border-2 border-[#1e6fdb] text-white hover:bg-[#1e6fdb]/20 font-bold px-5 py-2.5 md:px-[clamp(16px,2.6vh,28px)] md:py-[clamp(8px,1.3vh,14px)] rounded-full transition-colors duration-200 text-sm md:text-[clamp(13px,1.5vh,16px)] uppercase tracking-wide"
             >
               Ver Proyectos
             </button>

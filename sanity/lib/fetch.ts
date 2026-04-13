@@ -1,4 +1,4 @@
-import { client } from "./client";
+import { clientNoCdn } from "./client";
 import {
   siteSettingsQuery,
   heroSectionQuery,
@@ -8,9 +8,15 @@ import {
   contactInfoQuery,
 } from "./queries";
 
+// Todas las funciones de fetch usan clientNoCdn para que los datos
+// se actualicen al instante después de una revalidación desde Sanity.
+// El caché de Next.js (revalidate en page.tsx) sigue controlando
+// cuándo se regenera la página, así que no hay impacto en rendimiento
+// para los visitantes normales.
+
 export async function fetchSiteSettings() {
   try {
-    return await client.fetch(siteSettingsQuery);
+    return await clientNoCdn.fetch(siteSettingsQuery);
   } catch {
     return null;
   }
@@ -18,7 +24,7 @@ export async function fetchSiteSettings() {
 
 export async function fetchHeroSection() {
   try {
-    return await client.fetch(heroSectionQuery);
+    return await clientNoCdn.fetch(heroSectionQuery);
   } catch {
     return null;
   }
@@ -26,7 +32,7 @@ export async function fetchHeroSection() {
 
 export async function fetchServices() {
   try {
-    return await client.fetch(servicesQuery);
+    return await clientNoCdn.fetch(servicesQuery);
   } catch {
     return null;
   }
@@ -34,7 +40,7 @@ export async function fetchServices() {
 
 export async function fetchAboutSection() {
   try {
-    return await client.fetch(aboutSectionQuery);
+    return await clientNoCdn.fetch(aboutSectionQuery);
   } catch {
     return null;
   }
@@ -42,7 +48,7 @@ export async function fetchAboutSection() {
 
 export async function fetchProjects() {
   try {
-    return await client.fetch(projectsQuery);
+    return await clientNoCdn.fetch(projectsQuery);
   } catch {
     return null;
   }
@@ -50,7 +56,7 @@ export async function fetchProjects() {
 
 export async function fetchContactInfo() {
   try {
-    return await client.fetch(contactInfoQuery);
+    return await clientNoCdn.fetch(contactInfoQuery);
   } catch {
     return null;
   }

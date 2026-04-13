@@ -99,7 +99,7 @@ export default function Contact({ contactInfo, siteSettings }: ContactProps) {
             href={waUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-7 py-3.5 rounded-full transition-colors duration-200 text-base uppercase tracking-wide shadow-lg"
+            className="inline-flex items-center justify-center gap-2 w-fit bg-[#25D366] hover:bg-[#1fbe59] text-white font-bold px-5 py-2.5 sm:px-7 sm:py-3.5 rounded-full transition-colors duration-200 text-sm sm:text-base uppercase tracking-wide shadow-lg whitespace-nowrap"
           >
             <WhatsAppIcon />
             Escríbenos por WhatsApp
