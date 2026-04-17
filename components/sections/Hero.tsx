@@ -118,9 +118,9 @@ export default function Hero({
           <Image
             src={logoSrc}
             alt="Construcciones Capital"
-            width={280}
+            width={400}
             height={100}
-            className="h-[45px] md:h-[clamp(50px,7vh,80px)] w-auto object-contain"
+            className="h-[60px] md:h-[clamp(70px,10vh,110px)] w-auto object-contain"
             priority
           />
         </a>

@@ -139,16 +139,16 @@ export default function About({ aboutData }: AboutProps) {
             <h3 className="text-[#60a5fa] text-xs font-bold uppercase tracking-[0.25em] mb-4">
               Nuestra Misión
             </h3>
-            <p className="text-slate-200 text-base sm:text-lg leading-relaxed italic">
-              &ldquo;{mission}&rdquo;
+            <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
+              {mission}
             </p>
           </div>
           <div className="bg-white/5 border border-white/10 rounded-2xl p-8">
             <h3 className="text-[#60a5fa] text-xs font-bold uppercase tracking-[0.25em] mb-4">
               Nuestra Visión
             </h3>
-            <p className="text-slate-200 text-base sm:text-lg leading-relaxed italic">
-              &ldquo;{vision}&rdquo;
+            <p className="text-slate-200 text-base sm:text-lg leading-relaxed">
+              {vision}
             </p>
           </div>
         </motion.div>

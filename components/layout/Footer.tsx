@@ -1,11 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
 import { urlFor } from "@/sanity/lib/image";
 
 interface SiteSettings {
   instagram?: string;
   facebook?: string;
   youtube?: string;
+  tiktok?: string;
   whatsappSales?: string;
   city?: string;
   schedule?: string;
@@ -56,10 +56,19 @@ function YouTubeIcon() {
   );
 }
 
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46v-7.41a8.16 8.16 0 005.58 2.18v-3.45a4.85 4.85 0 01-1.99-.44z" />
+    </svg>
+  );
+}
+
 export default function Footer({ siteSettings, contactInfo }: FooterProps) {
   const instagramHref = siteSettings?.instagram || "#";
   const facebookHref = siteSettings?.facebook || "#";
   const youtubeHref = siteSettings?.youtube || "#";
+  const tiktokHref = siteSettings?.tiktok || "#";
   const phone = siteSettings?.whatsappSales || "573000000000";
   const logoSrc = siteSettings?.logo
     ? urlFor(siteSettings.logo).width(560).url()
@@ -79,15 +88,15 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Columna 1: Logo + descripción */}
           <div className="flex flex-col gap-4">
-            <Link href="/admin">
+            <a href="/admin" target="_blank" rel="noopener noreferrer">
               <Image
                 src={logoSrc}
                 alt="Construcciones Capital"
-                width={280}
+                width={400}
                 height={100}
-                className="h-[45px] md:h-[65px] w-auto object-contain"
+                className="h-[65px] md:h-[95px] w-auto object-contain"
               />
-            </Link>
+            </a>
             <p className="text-slate-400 text-sm leading-relaxed">
               Especialistas en domos, techos, pérgolas, decks y fachadas en Medellín.
             </p>
@@ -209,6 +218,15 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
                 >
                   <YouTubeIcon />
                 </a>
+                <a
+                  href={tiktokHref}
+                  aria-label="TikTok"
+                  target={tiktokHref !== "#" ? "_blank" : undefined}
+                  rel={tiktokHref !== "#" ? "noopener noreferrer" : undefined}
+                  className="text-slate-400 hover:text-[#1e6fdb] transition-colors duration-200"
+                >
+                  <TikTokIcon />
+                </a>
               </div>
             </div>
           </div>
@@ -222,14 +240,14 @@ export default function Footer({ siteSettings, contactInfo }: FooterProps) {
             © {new Date().getFullYear()} Construcciones Capital. Todos los derechos reservados.
           </p>
           <p className="text-slate-500 text-xs">
-            Desarrollado por{" "}
+            Sitio Web desarrollado por:{" "}
             <a
-              href="https://www.linkedin.com/in/danielesban/"
+              href="https://linktr.ee/DanielEstebanQuintero"
               target="_blank"
               rel="noopener noreferrer"
               className="text-slate-400 hover:text-[#60a5fa] transition-colors duration-200"
             >
-              Daniel Quintero
+              Daniel Q.
             </a>
           </p>
         </div>

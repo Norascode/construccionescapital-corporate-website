@@ -16,6 +16,7 @@ interface SiteSettings {
   instagram?: string;
   facebook?: string;
   youtube?: string;
+  tiktok?: string;
   schedule?: string;
 }
 
@@ -56,6 +57,14 @@ function YouTubeIcon() {
   );
 }
 
+function TikTokIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.46v-7.41a8.16 8.16 0 005.58 2.18v-3.45a4.85 4.85 0 01-1.99-.44z" />
+    </svg>
+  );
+}
+
 export default function Contact({ contactInfo, siteSettings }: ContactProps) {
   const phone = siteSettings?.whatsappSales || "573000000000";
   const waUrl = `https://wa.me/${phone}?text=${encodeURIComponent("Hola, me gustaría obtener información sobre sus servicios.")}`;
@@ -63,6 +72,7 @@ export default function Contact({ contactInfo, siteSettings }: ContactProps) {
   const instagramHref = siteSettings?.instagram || "#";
   const facebookHref = siteSettings?.facebook || "#";
   const youtubeHref = siteSettings?.youtube || "#";
+  const tiktokHref = siteSettings?.tiktok || "#";
 
   const city = contactInfo?.city || "Medellín, Antioquia — Colombia";
 
@@ -175,6 +185,15 @@ export default function Contact({ contactInfo, siteSettings }: ContactProps) {
               className="text-slate-400 hover:text-[#60a5fa] transition-colors duration-200"
             >
               <YouTubeIcon />
+            </a>
+            <a
+              href={tiktokHref}
+              aria-label="TikTok"
+              target={tiktokHref !== "#" ? "_blank" : undefined}
+              rel={tiktokHref !== "#" ? "noopener noreferrer" : undefined}
+              className="text-slate-400 hover:text-[#60a5fa] transition-colors duration-200"
+            >
+              <TikTokIcon />
             </a>
           </div>
 

@@ -8,6 +8,7 @@ export const siteSettingsQuery = groq`
     instagram,
     facebook,
     youtube,
+    tiktok,
     schedule
   }
 `;

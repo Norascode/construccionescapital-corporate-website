@@ -39,6 +39,11 @@ export default defineType({
       type: "url",
     }),
     defineField({
+      name: "tiktok",
+      title: "Link de TikTok",
+      type: "url",
+    }),
+    defineField({
       name: "schedule",
       title: "Horario de atención",
       type: "string",
